@@ -1,1 +1,1 @@
-$("#leftColumn").load("./include/include.html #leftColumn");
+$("#leftColumn").load("./include/left-column.html");
