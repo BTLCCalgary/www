@@ -369,3 +369,15 @@ table.donors td {
 	text-align: left;
 	padding-left: 10px;
 }
+
+.officeImageWrap {
+		width: 500px;
+		height: 275px;
+		overflow: hidden;
+}
+
+.officeImage {
+	width: 750px;
+	margin-left: -100px;
+    margin-top: -20px;
+}
