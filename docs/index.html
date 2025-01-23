@@ -22,6 +22,73 @@
     <link href="lightbox/css/lightbox.min.css" rel="stylesheet" />
 
     <script type="text/javascript" src="./js/nav.js"></script>
+
+    <style>
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: calc(100% - 48px);
+        height: calc(100% - 48px);
+        display: grid;
+        grid-template-rows: 1fr auto 1fr;
+        padding: 24px;
+        background: #000000bb;
+        gap: 16px;
+      }
+
+      .top-cell,
+      .bottom-cell {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        color: white;
+      }
+
+      .bottom-cell button {
+        font-size: 1.25rem;
+      }
+
+      .middle-cell {
+        position: relative; /* Needed to position the pseudo-element */
+        overflow: hidden; /* Ensures the image doesn't overflow */
+      }
+
+      .middle-cell::before {
+        content: "";
+        display: block;
+        padding-top: calc(
+          (22 / 17) * 100%
+        ); /* Maintains the 17/22 aspect ratio */
+      }
+
+      .middle-cell img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain; /* Ensures the image covers the cell area */
+      }
+    </style>
+
+    <script>
+      function closeOverlay() {
+        localStorage.setItem("promo", new Date().getTime());
+        document.getElementById("overlay")?.remove();
+      }
+
+      function showOverlay() {
+        document.getElementById("overlay").style.display = "grid";
+      }
+
+      window.onload = () => {
+        const timestamp = localStorage.getItem("promo") ?? 0;
+        if (new Date().getTime() - timestamp > 60 * 60 * 1000) {
+          showOverlay();
+        }
+      };
+    </script>
   </head>
 
   <body>
@@ -133,6 +200,52 @@
           </div>
         </div>
         <span id="footer"></span>
+      </div>
+    </div>
+
+    <div
+      id="overlay"
+      class="overlay"
+      onclick="closeOverlay()"
+      style="display: none"
+    >
+      <div class="top-cell"></div>
+      <div class="middle-cell">
+        <img src="images/spots_promo.jpg" />
+      </div>
+      <div class="bottom-cell">
+        <div>
+          <button
+            style="
+              display: flex;
+              align-items: center;
+              gap: 12px;
+              border-radius: 6px;
+              padding: 8px 12px;
+              color: #242424;
+            "
+          >
+            <span>Continue to BTLC</span>
+
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xml:space="preserve"
+              width="10"
+              height="17"
+              shape-rendering="geometricPrecision"
+              text-rendering="geometricPrecision"
+              image-rendering="optimizeQuality"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              viewBox="0 0 298 511.93"
+            >
+              <path
+                fill-rule="nonzero"
+                d="M70.77 499.85c-16.24 16.17-42.53 16.09-58.69-.15-16.17-16.25-16.09-42.54.15-58.7l185.5-185.03L12.23 70.93c-16.24-16.16-16.32-42.45-.15-58.7 16.16-16.24 42.45-16.32 58.69-.15l215.15 214.61c16.17 16.25 16.09 42.54-.15 58.7l-215 214.46z"
+              />
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
 
