@@ -85,7 +85,8 @@
       window.onload = () => {
         const timestamp = localStorage.getItem("promo") ?? 0;
         if (new Date().getTime() - timestamp > 60 * 60 * 1000) {
-          showOverlay();
+          // Temporarily disable the overlay
+          //showOverlay();
         }
       };
     </script>
